@@ -388,9 +388,9 @@ function main() {
     const notPalindrome = "computacion";
 
     console.log("firstNonRepeating:", firstNonRepeating(sentence)); 
-    console.log("bubbleSort:", bubbleSort([...nums2]));
+    console.log("bubbleSort:", bubbleSort(nums2));
     console.log("invertArray:", invertArray(nums2));
-    console.log("invertArrayInplace:", invertArrayInplace([...nums2]));
+    console.log("invertArrayInplace:", invertArrayInplace(nums2));
     console.log("capitalize:", capitalize("hola mundo desde javascript"));
     console.log("mcd:", mcd(24, 18));
     console.log("hackerSpeak:", hackerSpeak("Javascript es increible"));
@@ -399,12 +399,12 @@ function main() {
     console.log("findShortestString:", findShortestString(strs2));
     console.log("isPalindrome (true):", isPalindrome(palindrome));
     console.log("isPalindrome (false):", isPalindrome(notPalindrome));
-    console.log("sortStrings:", sortStrings([...strs2]));
+    console.log("sortStrings:", sortStrings(strs2));
     console.log("stats [avg, mode]:", stats(nums));
     console.log("popularString:", popularString(strs));
     console.log("isPowerOf2 (16):", isPowerOf2(16));
     console.log("isPowerOf2 (18):", isPowerOf2(18));
-    console.log("sortDescending:", sortDescending([...nums2]));
+    console.log("sortDescending:", sortDescending(nums2));
 }
 
 main();

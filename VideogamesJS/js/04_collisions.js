@@ -18,7 +18,7 @@ let ctx;
 let game;
 
 // Variable to store the time at the previous frame
-let oldTime;
+let oldTime = 0;
 
 let playerSpeed = 0.5;
 
@@ -30,20 +30,25 @@ class Player extends GameObject {
     }
 
     update(deltaTime) {
+        this.velocity = this.velocity.normalize().times(playerSpeed);
         this.position = this.position.plus(this.velocity.times(deltaTime));
 
         this.clampWithinCanvas();
     }
 
     clampWithinCanvas() {
-        if (this.position.y < 0) {
-            this.position.y = 0;
-        } else if (this.position.y + this.height > canvasHeight) {
-            this.position.y = canvasHeight - this.height;
-        } else if (this.position.x < 0) {
-            this.position.x = 0;
-        } else if (this.position.x + this.width > canvasWidth) {
-            this.position.x = canvasWidth - this.width;
+        //top border
+        if (this.position.y - this.halfSize.y < 0) {
+            this.position.y = this.halfSize.y;
+        //bottom border
+        } if (this.position.y + this.halfSize.y > canvasHeight) {
+            this.position.y = canvasHeight - this.halfSize.y;
+        //left border
+        } if (this.position.x - this.halfSize.x < 0) {
+            this.position.x = this.halfSize.x;
+        // right border
+        } if (this.position.x + this.halfSize.x > canvasWidth) {
+            this.position.x = canvasWidth - this.halfSize.x;
         }
     }
 }
@@ -79,6 +84,7 @@ class Game {
 
         // Check collision against other objects
         for (let actor of this.actors) {
+            //if (this.player.position.minus(actor.position).magnitude() < 70){
             if (boxOverlap(this.player, actor)) {
                 actor.color = "yellow";
             } else {
@@ -138,7 +144,7 @@ function main() {
 function drawScene(newTime) {
     // Compute the time elapsed since the last frame, in milliseconds
     // TODO: Compute the correct value for deltaTime, using newTime and oldTime
-    let deltaTime = 1;
+    let deltaTime = newTime - oldTime;
 
     // Clean the canvas so we can draw everything again
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
