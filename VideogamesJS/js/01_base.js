@@ -41,15 +41,8 @@ function draw() {
     ctx.fill();
     ctx.stroke();
 
-    // Draw a circle
-    ctx.beginPath();
-    ctx.fillStyle = "pink";
-    ctx.strokeStyle = "black";
-    ctx.ellipse(100, 400, 30, 30, 0, 0, Math.PI * 1.5, false);
-    ctx.fill();
-    ctx.stroke();
-
     house();
+    happyFace();
 
     // TODO: Make different shapes using the canvas 2d functions
 
@@ -75,4 +68,29 @@ function house() {
     ctx.lineTo(250, 140);
     ctx.closePath();
     ctx.stroke();
+}
+
+function happyFace(){
+    ctx.beginPath();
+    ctx.fillStyle = "yellow";
+    ctx.strokeStyle = "black";
+    ctx.ellipse(200, 400, 100, 100, 0, 0, Math.PI * 2, false);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.strokeStyle = "black";
+    ctx.ellipse(170, 370, 10, 20, 0, 0, Math.PI * 2);
+    ctx.ellipse(230, 370, 10, 20, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.strokeStyle = "black";
+    ctx.ellipse(200, 400, 20, 10, 0, 0, Math.PI);
+    ctx.fill();
+    ctx.stroke();
+
 }
