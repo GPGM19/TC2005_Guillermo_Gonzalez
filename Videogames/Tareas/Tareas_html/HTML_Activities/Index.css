@@ -1,0 +1,17 @@
+body{
+    color: cadetblue;
+    background-color:wheat;
+}
+
+
+.Header{
+    color:blue;
+    background-color: wheat;
+}
+
+
+.Subtitles{
+    font-family: Franklin Gothic Medium;
+    color:gold;
+    background-color:gray;
+}
