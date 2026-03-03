@@ -17,8 +17,9 @@ let ctx;
 let angle = 0;
 let radius = 100;
 
+// Variable for the time
 let oldTime = 0;
-let newTime;
+
 // An object to represent the box to be displayed
 const box = {
     color: "red",
@@ -40,7 +41,8 @@ function main() {
 }
 
 function drawScene(newTime) {
-    let deltaTime = newTime - oldTime
+    let deltaTime = newTime - oldTime;
+    console.log(`Old: ${oldTime}, New: ${newTime}, Delta: ${deltaTime}`);
     // Clean the canvas so we can draw everything again
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
@@ -56,12 +58,13 @@ function drawScene(newTime) {
     ctx.fillStyle = box.color;
     ctx.fillRect(box.x + offsetX, box.y + offsetY, box.size, box.size);
 
-    // Update vales for next frame
+    // Update vales for next frame, multiplying by the elapsed time
     angle += 0.001 * deltaTime;
     // TODO: Use mathematical functions to set the actual position of the object
     box.x = radius * Math.cos(angle);
     box.y = radius * Math.sin(angle);
 
+    // Update the starting time
     oldTime = newTime;
     requestAnimationFrame(drawScene);
 }

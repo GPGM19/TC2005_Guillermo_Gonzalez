@@ -30,6 +30,7 @@ class Player extends GameObject {
     }
 
     update(deltaTime) {
+        // Normalize the velocity verctor to use the same speed on the diagonals
         this.velocity = this.velocity.normalize().times(playerSpeed);
         this.position = this.position.plus(this.velocity.times(deltaTime));
 
@@ -37,17 +38,20 @@ class Player extends GameObject {
     }
 
     clampWithinCanvas() {
-        //top border
+        // Top border
         if (this.position.y - this.halfSize.y < 0) {
             this.position.y = this.halfSize.y;
-        //bottom border
-        } if (this.position.y + this.halfSize.y > canvasHeight) {
-            this.position.y = canvasHeight - this.halfSize.y;
-        //left border
-        } if (this.position.x - this.halfSize.x < 0) {
+        // Left border
+        }
+        if (this.position.x - this.halfSize.x < 0) {
             this.position.x = this.halfSize.x;
-        // right border
-        } if (this.position.x + this.halfSize.x > canvasWidth) {
+        // Bottom border
+        }
+        if (this.position.y + this.halfSize.y > canvasHeight) {
+            this.position.y = canvasHeight - this.halfSize.y;
+        // Right border
+        }
+        if (this.position.x + this.halfSize.x > canvasWidth) {
             this.position.x = canvasWidth - this.halfSize.x;
         }
     }
@@ -84,7 +88,9 @@ class Game {
 
         // Check collision against other objects
         for (let actor of this.actors) {
-            //if (this.player.position.minus(actor.position).magnitude() < 70){
+            // Naive collision detection, using the distances between objects
+            //if (this.player.position.minus(actor.position).magnitude() < 70) {
+            // Collision detection between the objects
             if (boxOverlap(this.player, actor)) {
                 actor.color = "yellow";
             } else {
@@ -98,13 +104,13 @@ class Game {
         // It breaks if multiple keys are pressed simultaneously
         window.addEventListener('keydown', (event) => {
             if (event.key == 'w') {
-                this.player.velocity.y = -playerSpeed;
+                this.player.velocity.y = -1;
             } else if (event.key == 'a') {
-                this.player.velocity.x = -playerSpeed;
+                this.player.velocity.x = -1;
             } else if (event.key == 's') {
-                this.player.velocity.y = playerSpeed;
+                this.player.velocity.y = 1;
             } else if (event.key == 'd') {
-                this.player.velocity.x = playerSpeed;
+                this.player.velocity.x = 1;
             }
         });
 

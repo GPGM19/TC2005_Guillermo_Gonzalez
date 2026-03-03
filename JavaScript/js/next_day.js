@@ -6,9 +6,13 @@
  */
 
 function isLeap(year) {
+<<<<<<< HEAD
     if ((year % 4 == 0 && year % 100 != 0) ||(year % 400 == 0))
         return true;
     return false
+=======
+    return year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);
+>>>>>>> upstream/2026.401
 }
 
 function monthDays(month, year) {
