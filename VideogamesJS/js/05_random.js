@@ -18,9 +18,9 @@ let ctx;
 let game;
 
 // Variable to store the time at the previous frame
-let oldTime;
+let oldTime = 0;
 
-let playerSpeed = 0.5;
+let playerSpeed = 0.8;
 
 // Class for the main character in the game
 class Player extends GameObject {
@@ -62,21 +62,24 @@ class Player extends GameObject {
             this.velocity[axis] += sign;
         }
         // TODO: Normalize the velocity to avoid greater speed on diagonals
-
+        this.velocity = this.velocity.normalize().times(playerSpeed);
         this.position = this.position.plus(this.velocity.times(deltaTime));
 
         this.clampWithinCanvas();
     }
 
     clampWithinCanvas() {
-        if (this.position.y < 0) {
-            this.position.y = 0;
-        } else if (this.position.y + this.height > canvasHeight) {
-            this.position.y = canvasHeight - this.height;
-        } else if (this.position.x < 0) {
-            this.position.x = 0;
-        } else if (this.position.x + this.width > canvasWidth) {
-            this.position.x = canvasWidth - this.width;
+        if (this.position.y - this.halfSize.y < 0) {
+            this.position.y = this.halfSize.y;
+        //bottom border
+        } if (this.position.y + this.halfSize.y > canvasHeight) {
+            this.position.y = canvasHeight - this.halfSize.y;
+        //left border
+        } if (this.position.x - this.halfSize.x < 0) {
+            this.position.x = this.halfSize.x;
+        // right border
+        } if (this.position.x + this.halfSize.x > canvasWidth) {
+            this.position.x = canvasWidth - this.halfSize.x;
         }
     }
 }
@@ -93,7 +96,7 @@ class Game {
         this.player = new Player(new Vector(canvasWidth / 2, canvasHeight / 2), 60, 60, "red");
 
         this.actors = [];
-        for (let i=0; i<10; i++) {
+        for (let i=0; i<8; i++) {
             this.addBox();
         }
     }
@@ -122,11 +125,13 @@ class Game {
     addBox() {
         // TODO: Use the randomRange function to make these values different
         // Create boxes with minimum size 50, and up to 50 pixels more
-        const size = 50;
+        const min_size = 50;
+        const max_size = 100;
+        let random_size = randomRange(50,50);
         // Define a random position for the box, within the canvas
-        const posX = 60;
-        const posY = 70;
-        const box = new GameObject(new Vector(posX, posY), size, size, "grey");
+        let posX = randomRange(canvasWidth,0);
+        let posY = randomRange(canvasHeight,0);
+        const box = new GameObject(new Vector(posX, posY), random_size, random_size, "grey");
         // Set a property to indicate if the box should be destroyed or not
         box.destroy = false;
         this.actors.push(box);
@@ -192,7 +197,7 @@ function main() {
 // Main loop function to be called once per frame
 function drawScene(newTime) {
     // Compute the time elapsed since the last frame, in milliseconds
-    let deltaTime = 1;
+    let deltaTime = newTime - oldTime;
 
     // Clean the canvas so we can draw everything again
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);

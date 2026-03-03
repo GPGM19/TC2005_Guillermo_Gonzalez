@@ -15,3 +15,10 @@ body{
     color:gold;
     background-color:gray;
 }
+
+#IMG_Type{
+    max-width: 400px;   
+    max-height: 250px;  
+    width: auto;        
+    height: auto;       
+}
