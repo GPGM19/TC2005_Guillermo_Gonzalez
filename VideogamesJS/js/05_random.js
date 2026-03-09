@@ -1,5 +1,5 @@
 /*
- * Detection of collisions between boxes
+ * Generating multiple new objects in random positions
  *
  * Gilberto Echeverria
  * 2025-03-13
@@ -62,23 +62,29 @@ class Player extends GameObject {
             this.velocity[axis] += sign;
         }
         // TODO: Normalize the velocity to avoid greater speed on diagonals
+
         this.velocity = this.velocity.normalize().times(playerSpeed);
+
         this.position = this.position.plus(this.velocity.times(deltaTime));
 
         this.clampWithinCanvas();
     }
 
     clampWithinCanvas() {
+        // Top border
         if (this.position.y - this.halfSize.y < 0) {
             this.position.y = this.halfSize.y;
-        //bottom border
-        } if (this.position.y + this.halfSize.y > canvasHeight) {
-            this.position.y = canvasHeight - this.halfSize.y;
-        //left border
-        } if (this.position.x - this.halfSize.x < 0) {
+        // Left border
+        }
+        if (this.position.x - this.halfSize.x < 0) {
             this.position.x = this.halfSize.x;
-        // right border
-        } if (this.position.x + this.halfSize.x > canvasWidth) {
+        // Bottom border
+        }
+        if (this.position.y + this.halfSize.y > canvasHeight) {
+            this.position.y = canvasHeight - this.halfSize.y;
+        // Right border
+        }
+        if (this.position.x + this.halfSize.x > canvasWidth) {
             this.position.x = canvasWidth - this.halfSize.x;
         }
     }
@@ -125,13 +131,11 @@ class Game {
     addBox() {
         // TODO: Use the randomRange function to make these values different
         // Create boxes with minimum size 50, and up to 50 pixels more
-        const min_size = 50;
-        const max_size = 100;
-        let random_size = randomRange(50,50);
+        const size = randomRange(50, 50);
         // Define a random position for the box, within the canvas
-        let posX = randomRange(canvasWidth,0);
-        let posY = randomRange(canvasHeight,0);
-        const box = new GameObject(new Vector(posX, posY), random_size, random_size, "grey");
+        const posX = randomRange(canvasWidth);
+        const posY = randomRange(canvasHeight);
+        const box = new GameObject(new Vector(posX, posY), size, size, "grey");
         // Set a property to indicate if the box should be destroyed or not
         box.destroy = false;
         this.actors.push(box);
