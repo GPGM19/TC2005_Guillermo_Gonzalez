@@ -64,12 +64,12 @@ function drawScene() {
     box.x += box.speed * box.directionX;
     box.y += box.speed * box.directionY;
 
-    drawObjcet(ctx);
+    drawObject(ctx);
 
     requestAnimationFrame(drawScene);
 }
 
-function drawObjcet(ctx) {
+function drawObject(ctx) {
     // Draw a square
     ctx.beginPath();
     ctx.fillStyle = "yellow";

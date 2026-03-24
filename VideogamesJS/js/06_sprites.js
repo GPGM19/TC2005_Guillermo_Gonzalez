@@ -103,8 +103,8 @@ class Game {
         this.background = new GameObject(new Vector(canvasWidth / 2, canvasHeight / 2), canvasWidth, canvasHeight);
         this.background.setSprite("../assets/sprites/trak2_plate2b.png");
 
-        this.player = new Player(new Vector(canvasWidth / 2, canvasHeight / 2), 120, 130, "red");
-        this.player.setSprite(".../assets/sprites/link_sprite_sheet.png", new Rect(120,910,120,130));
+        this.player = new Player(new Vector(canvasWidth / 2, canvasHeight / 2), 60, 60, "red");
+        this.player.setSprite("../assets/sprites/blordrough_quartermaster-NESW.png", new Rect(48, 128, 48, 64));
 
         this.actors = [];
         for (let i=0; i<10; i++) {
