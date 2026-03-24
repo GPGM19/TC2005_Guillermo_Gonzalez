@@ -56,7 +56,7 @@ class AnimatedObject extends GameObject {
             let restartFrame = this.repeat ? this.minFrame : this.maxFrame;
             // TODO: Change the frame to the next one
             //       Either the next one or the restart
-            this.frame = this.frame == this.maxFrame ? restartFrame : this.frame + 1;
+            this.frame = this.frame === this.maxFrame ? restartFrame : this.frame + 1;
             // TODO: Determine the top left corner of the frame to draw from the spritesheet
             //       This requires the number of columns in the sheet, multiplied by the dimensions
             this.spriteRect.x = this.frame % this.sheetCols * this.spriteRect.width;
