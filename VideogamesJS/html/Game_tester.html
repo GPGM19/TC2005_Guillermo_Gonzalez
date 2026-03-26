@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hyperjump</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/Librerias/game_functions.js"></script>
+    <script src="../js/Librerias/Rect.js"></script>
+    <script src="../js/Librerias/Vector.js"></script>
+    <script src="../js/Librerias/GameObject.js"></script>
+    <script src="../js/Librerias/AnimatedObject.js"></script>
+    <script src="../js/Librerias/AnimatedPlayer.js"></script>
+    <script src="../js/hyperjump.js"></script>
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">Navegacion</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#tutorial">Tutorial</a></li>
+                <li><a href="#personajes">Personajes</a></li>
+                <li><a href="#estadisticas">Estadísticas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio">
+            <h1>Bienvenido a hyperjump</h1>
+            <canvas id="canvas"></canvas>
+            <button type= " button" onclick="main()">Jugar Ahora</button>
+        </section>
+
+        <section id="tutorial">
+            <h2>Cómo Jugar</h2>
+            <div class="grid-tutorial">
+                <div class="card">Moverse: WASD</div>
+                <div class="card">Atacar: Clic Izquierdo</div>
+            </div>
+        </section>
+
+        <section id="personajes">
+            <h2>Tus Héroes</h2>
+            <div class="character-gallery">
+                </div>
+        </section>
+
+        <section id="estadisticas">
+            <h2>Ranking Global</h2>
+            <table>
+                <tr><th>Jugador</th><th>Puntaje</th></tr>
+                <tr><td>Player_01</td><td>1500</td></tr>
+            </table>
+        </section>
+    </main>
+
+</body>
+</html>
